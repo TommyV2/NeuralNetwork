@@ -26,3 +26,13 @@ c = np.array([4])
 d = np.array([2])
 print(a.T)
 
+def mse(y_true, y_pred):  
+    val = np.mean(np.power(y_true-y_pred, 2))
+    return np.mean(np.power(y_true-y_pred, 2))
+
+def mse_prime(y_true, y_pred):
+    return 2*(y_pred-y_true)/y_true.size
+
+print(mse(np.array([0.12345]), np.array([0.1234])))
+print(mse_prime(np.array([0.12345]), np.array([0.1234])))
+

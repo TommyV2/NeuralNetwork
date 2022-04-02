@@ -6,10 +6,12 @@ mutable struct FullyConnectedLayer
     weights::Matrix{Float64}
     bias::Matrix{Float64}
 
-    function FullyConnectedLayer(input::Int , output::Int, index::Int) #TO DELETE
-        weights = get_weights(input, output, index) #TO DELETE
-        bias = get_bias(output, index) #TO DELETE
-        new(0, 0, weights, bias) 
+    function FullyConnectedLayer(input::Int , output::Int, idx::Int) #TO DELETE
+        weights = get_weights(input, output, idx) #TO DELETE
+        bias = get_bias(output, idx) #TO DELETE
+        # bias = convert_to_matrix(bias)
+        # println("weights: $weights, bias: $bias")
+        new(0, 0, weights, bias) #TO DELETE
     end    
 end
 
@@ -32,4 +34,12 @@ mutable struct Network
     function Network(layers::Vector{Any}, loss::Function, loss′::Function)
         new(layers, loss, loss′)
     end   
+end
+
+function convert_to_matrix(arr)
+    len = length(arr)
+    if len > 1
+        return permutedims(vcat(arr...))
+    end
+    return arr
 end

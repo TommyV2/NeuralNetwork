@@ -14,6 +14,16 @@ function get_bias(output_size::Int)
     return bias
 end
 
+function compute_tanh(x)
+    val = tanh.(x)
+    return val
+end
+
+function compute_tanh′(x)
+    val = 1 - tanh.(first(x))^2
+    return val
+end
+
 a = 3
 b = 2
 # wei = get_weights(3,3)
@@ -76,29 +86,20 @@ function dot2(A, B)
     end
 end
 
-function mean_squared_error′(y_true, y_pred)
-    val = 2*(y_pred-y_true)/length(y_true)
+function mean_squared_error(y_true, y_pred)
+    val = first(mean((y_true.-y_pred).^2, dims=2))
     return val
 end
 
-a = [2 3]
-b = [4 4]
-c = [4]
-d = [2]
+function mean_squared_error′(y_true, y_pred)
+    val = 2*(y_pred.-y_true)/length(y_true)
+    return round(first(val), digits=7) 
+end
 
-A = -0.02315588799837393
-B = [-0.02 0.01 0.03]
 
-C = [-0.01199942; 0.00899976; 0.00299999]
-D = -0.02315589
-
-myC = [-0.011999424033175667; 0.008999757007872942; 0.0029999910000324;;]
-
-outAB = [ 0.00046312 -0.00023156 -0.00069468]
-outCD = [2.77857319e-04; -2.08397365e-04; -6.94674556e-05]
-
-myAB = [-0.0004631177599674786]
-myCD = [0.0002778573189572121 -0.00020839736528688673 -6.946745559288005e-5]
-
-print(dot2(C,D))
-
+# A = 0 0 
+# B = [2.5067575330553957 0.1295373142612433 0.288392041029594; 2.615823750138521 -0.1394371453592334 -0.33878987491871604]
+# out = 
+a = 30
+a -= 4 * 5
+print(a)

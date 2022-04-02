@@ -19,3 +19,8 @@ function mean_squared_error′(y_true, y_pred)
     val = 2*(y_pred.-y_true)/length(y_true)
     return val
 end
+
+# function mean_squared_error′(y_true, y_pred)
+#     val = 2*(y_pred.-y_true)/length(y_true)
+#     return round(first(val), digits=7) 
+# end

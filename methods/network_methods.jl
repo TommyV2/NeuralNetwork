@@ -10,10 +10,10 @@ function use_loss_function(network, loss, loss′)
         network.loss′ = loss′
 end
 
-function predict(network, input_data)
+function predict(network, x_test)
         result = []
-        for value in input_data
-            output = value
+        for row in eachrow(x_test)
+            local output = convert_to_matrix(row)
             for layer in network.layers
                 type = typeof(layer)
                 if type == FullyConnectedLayer
@@ -31,7 +31,7 @@ function train_network(network, x_train, y_train, epochs, learning_rate)
     layers_num = length(network.layers)
     for i in 1:epochs
         err = 0
-        local j = 1
+        j = 1
         for row in eachrow(x_train)
             output = convert_to_matrix(row)
             for layer in network.layers
@@ -41,8 +41,9 @@ function train_network(network, x_train, y_train, epochs, learning_rate)
                 else
                     output = forward_propagation_al(layer, output)
                 end 
-            end
-            
+                # println("output: $output")
+            end 
+            tt = y_train[j]
             err += network.loss(y_train[j], output)
             error = network.loss′(y_train[j], output)
             for layer in Iterators.reverse(network.layers)
@@ -56,7 +57,7 @@ function train_network(network, x_train, y_train, epochs, learning_rate)
             j += 1    
         end
         err /= layers_num
-        println("epoch $i/1000   error=$err")
+        println("epoch $i/$epochs   error=$err")
     end
 end
 
