@@ -14,10 +14,24 @@ add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
 add_layer(network, FullyConnectedLayer(3, 1, 2)) #TO DELETE
 add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
 
-use_loss_function(network, mean_squared_error, mean_squared_error′)
 epochs = 1000
 learning_rate = 0.1
-fit(network, x_train, y_train, epochs, learning_rate)
 
+#train
+use_loss_function(network, mean_squared_error, mean_squared_error′)
+train_network(network, x_train, y_train, epochs, learning_rate)
+
+# for layer in network.layers
+#     type = typeof(layer)
+#     if type == FullyConnectedLayer
+#         w = layer.weights
+#         b = layer.bias
+#         println("$w")
+#         println("$b")
+#         println("---------------------")
+#     end
+# end
+
+#test
 out = predict(network, x_train)
 print(out)

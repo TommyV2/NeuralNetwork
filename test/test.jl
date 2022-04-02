@@ -60,27 +60,45 @@ function dot(A, B)
     end
 end
 
-a = [1 1]
-x = [2 2]
-b = [1 2 3; 2 4 6]
-c = [1 2 3]
-d = [1; 2; 3]
-# dot:
-# col1 < col2
+function dot2(A, B)
+    col1 = size(A, 1)
+    col2 = size(B, 1)
+    if col1 < col2 || col1 == 1 || col2 == 1
+        return A * B
+    else
+        val = sum(A.*B, dims=2)
+        len = length(val)
+        val2 = resize!(vec(val), len)
+        if len > 1
+            return permutedims(vcat(val2...)) 
+        end      
+        return val2
+    end
+end
 
-# dot2: 
-# col1 >= col2
+function mean_squared_error′(y_true, y_pred)
+    val = 2*(y_pred-y_true)/length(y_true)
+    return val
+end
 
-println(dot(a,b))
-println(dot(c,d))
-println(dot(a,x))
-println(dot(b,c))
+a = [2 3]
+b = [4 4]
+c = [4]
+d = [2]
 
-new = dot(b,c)
-old = a
+A = -0.02315588799837393
+B = [-0.02 0.01 0.03]
 
-println(dot(new,old))
+C = [-0.01199942; 0.00899976; 0.00299999]
+D = -0.02315589
 
+myC = [-0.011999424033175667; 0.008999757007872942; 0.0029999910000324;;]
 
+outAB = [ 0.00046312 -0.00023156 -0.00069468]
+outCD = [2.77857319e-04; -2.08397365e-04; -6.94674556e-05]
 
-println(size([4 1;1 0]))
+myAB = [-0.0004631177599674786]
+myCD = [0.0002778573189572121 -0.00020839736528688673 -6.946745559288005e-5]
+
+print(dot2(C,D))
+

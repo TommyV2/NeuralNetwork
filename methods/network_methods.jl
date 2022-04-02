@@ -27,8 +27,9 @@ function predict(network, input_data)
         return result
 end
 
-function fit(network, x_train, y_train, epochs, learning_rate)
-    for i in epochs
+function train_network(network, x_train, y_train, epochs, learning_rate)
+    layers_num = length(network.layers)
+    for i in 1:epochs
         err = 0
         local j = 1
         for row in eachrow(x_train)
@@ -41,8 +42,8 @@ function fit(network, x_train, y_train, epochs, learning_rate)
                     output = forward_propagation_al(layer, output)
                 end 
             end
+            
             err += network.loss(y_train[j], output)
-
             error = network.loss′(y_train[j], output)
             for layer in Iterators.reverse(network.layers)
                 type = typeof(layer)
@@ -52,11 +53,10 @@ function fit(network, x_train, y_train, epochs, learning_rate)
                     error = backward_propagation_al(layer, error)
                 end 
             end
-            j += 1
+            j += 1    
         end
-        # calculate average error on all samples
-        err /= length(epochs)
-        #println('epoch %d/%d   error=%f' % (i+1, epochs, err))
+        err /= layers_num
+        println("epoch $i/1000   error=$err")
     end
 end
 

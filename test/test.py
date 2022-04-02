@@ -16,15 +16,13 @@ def predict(input_data):
             print(output)
             #output = forward_propagation(output)
             
+def mse_prime(y_true, y_pred):
+    print(y_true.size)
+    return 2*(y_pred-y_true)/y_true.size
 
+a = np.array([[2], [3], [5]])
+b = np.array([4, 4])
+c = np.array([4])
+d = np.array([2])
+print(a.T)
 
-
-a = np.array([1, 1])
-x = np.array([2, 2])
-b = np.array([[1, 2, 3], [2, 4, 6]])
-c = np.array([1, 2, 3])
-d = np.array([[1],[2],[3]])
-print(np.dot(a,b))
-print(np.dot(c,d))
-print(np.dot(a,x))
-print(np.dot(b,c))
