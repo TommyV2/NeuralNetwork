@@ -5,8 +5,15 @@ function compute_tanh(x)
     return val
 end
 
+# function compute_tanh′(x)
+#     val = 1 - tanh.(first(x))^2
+#     return val
+# end
+
 function compute_tanh′(x)
-    val = 1 - tanh.(first(x))^2
+    val = tanh.(x).^2 
+    val = val .* (-1)
+    val .+= 1
     return val
 end
 

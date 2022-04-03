@@ -41,7 +41,6 @@ function train_network(network, x_train, y_train, epochs, learning_rate)
                 else
                     output = forward_propagation_al(layer, output)
                 end 
-                # println("output: $output")
             end 
             tt = y_train[j]
             err += network.loss(y_train[j], output)

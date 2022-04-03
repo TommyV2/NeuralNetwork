@@ -1,8 +1,13 @@
 function forward_propagation_fcl(layer::FullyConnectedLayer, input) 
     layer.input = input
+    w = layer.weights
+    # println("w: $w")
     x = dot(input, layer.weights)
+    w = layer.weights
+    # println("w: $w")
     layer.output =  x + layer.bias
     o = layer.output
+    b = layer.bias
     return layer.output
 end
 
@@ -10,8 +15,8 @@ function backward_propagation_fcl(layer::FullyConnectedLayer, output_error, lear
     input_error = dot2(output_error, transpose(layer.weights))
     weights_error = dot2(transpose(layer.input),  output_error)
 
-    layer.weights -= learning_rate * weights_error
-    layer.bias .-= learning_rate * output_error
+    layer.weights -= learning_rate * floor.(weights_error, digits=8)
+    layer.bias .-= learning_rate * floor.(output_error, digits=8)
 
     return input_error
 end

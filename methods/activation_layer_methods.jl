@@ -6,7 +6,7 @@ function forward_propagation_al(layer::ActivationLayer, input)
 end
 
 function backward_propagation_al(layer::ActivationLayer, output_error::Matrix{Float64}) 
-    input_error = layer.activation′(layer.input) * output_error
+    input_error = layer.activation′(layer.input) .* output_error
 
     return input_error
 end
