@@ -12,7 +12,7 @@ end
 
 function predict(network, x_test)
         result = []
-        for row in x_test #eachrow(x_test)
+        for row in x_test
             local output = convert_to_matrix(row)
             for layer in network.layers
                 type = typeof(layer)
@@ -32,7 +32,7 @@ function train_network(network, x_train, y_train, epochs, learning_rate)
     for i in 1:epochs
         err = 0
         j = 1
-        for row in x_train #eachrow(x_train)
+        for row in x_train
             output = convert_to_matrix(row)
             for layer in network.layers
                 type = typeof(layer)

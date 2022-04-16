@@ -1,10 +1,8 @@
 function forward_propagation_fcl(layer::FullyConnectedLayer, input) 
     layer.input = input
     w = layer.weights
-    # println("w: $w")
     x = dot(input, layer.weights)
     w = layer.weights
-    # println("w: $w")
 
     layer.output =  x + layer.bias
     o = layer.output

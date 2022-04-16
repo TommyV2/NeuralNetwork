@@ -9,17 +9,14 @@ include("methods/helper_functions.jl")
 
 function placeholder() end
 
-# train_x = [0 0; 0 1; 1 0; 1 1]
-# train_y = [0 0 0; 1 0 0; 1 0 0; 0 0 0]
-# test_x = [0 0; 0 1; 1 0; 1 1]
-# test_y = [0 0 0; 1 0 0; 1 0 0; 0 0 0]
-# print(train_x[1])
-# print(train_y[1])
-
-
 # MNIST EXAMPLE: ---------------------------
 train_x_raw, train_y_raw = MNIST.traindata()
 test_x_raw, test_y_raw  = MNIST.testdata()
+
+# to save images:
+# for i = 1:20
+#     save("images/test"*string(i)*".png", MNIST.convert2image(MNIST.testtensor(i)))
+# end
 
 train_x = []
 train_y = []
@@ -43,10 +40,6 @@ end
 test_x = test_x'
 test_y = test_y'
 
-# train_x_new = reduce(hcat, train_x)
-# println(train_x_new[1])
-# println(train_x_new)
-# ------------------------------------------
 
 network = Network(Any[], placeholder, placeholder)
 
@@ -82,9 +75,14 @@ train_network(network, train_x, train_y, epochs, learning_rate)
 
 #test
 out = predict(network, test_x)
-for i = 1:3
-    println("Expected: ")
-    println(test_y[i])
-    println("Result: ")
+for i = 1:10
+    expected = argmax(test_y[i])[2] - 1
+    result = argmax(out[i])[2] - 1
+    score = out[i][result+1]
+    println("-------------------------------------")
+    println("Expected number: ", expected)
+    println("Result number: ", result, " with score: ", score)
+    println("All scores: ")
     println(out[i])
+    println("-------------------------------------")
 end
