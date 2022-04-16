@@ -5,6 +5,7 @@ function forward_propagation_fcl(layer::FullyConnectedLayer, input)
     x = dot(input, layer.weights)
     w = layer.weights
     # println("w: $w")
+
     layer.output =  x + layer.bias
     o = layer.output
     b = layer.bias
@@ -41,7 +42,6 @@ function dot2(A, B)
     col1 = size(A, 1)
     col2 = size(B, 1)
     if col1 < col2 || col1 == 1 || col2 == 1
-        # println("A: $A, B: $B")
         return A * B
     else
         val = sum(A.*B, dims=2)

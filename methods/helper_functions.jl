@@ -11,9 +11,7 @@ end
 # end
 
 function compute_tanh′(x)
-    val = tanh.(x).^2 
-    val = val .* (-1)
-    val .+= 1
+    val = tanh.(x).^2 .* (-1) .+ 1
     return val
 end
 
