@@ -42,7 +42,6 @@ function train_network(network, x_train, y_train, epochs, learning_rate)
                     output = forward_propagation_al(layer, output)
                 end 
             end 
-            tt = y_train[j]
             err += network.loss(y_train[j], output)
             error = network.loss′(y_train[j], output)
             for layer in Iterators.reverse(network.layers)

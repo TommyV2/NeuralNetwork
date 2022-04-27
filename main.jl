@@ -1,7 +1,7 @@
 using MLDatasets
 using Images
 using TestImages
-using Plots
+# using Plots
 include("structures.jl")
 include("methods/network_methods.jl")
 include("methods/helper_functions.jl")
@@ -49,22 +49,24 @@ network = Network(Any[], placeholder, placeholder)
 # epoch 25/100   error=10.563332528435122
 # epoch 50/100   error=6.456265929172283
 # epoch 90/100   error=4.347389388116945
-# add_layer(network, FullyConnectedLayer(784, 100))
-# add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
-# add_layer(network, FullyConnectedLayer(100, 10))
-# add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
+#
+add_layer(network, FullyConnectedLayer(784, 100))
+add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
+add_layer(network, FullyConnectedLayer(100, 10))
+add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
 
 # Network 2:
 # epoch 10/100   error=5.600691435288279
 # epoch 25/100   error=2.2441759134388533
 # epoch 50/100   error=1.118932339798652
 # epoch 90/100   error=0.6041599370121681
-add_layer(network, FullyConnectedLayer(784, 100))
-add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
-add_layer(network, FullyConnectedLayer(100, 50))
-add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
-add_layer(network, FullyConnectedLayer(50, 10))
-add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
+#
+# add_layer(network, FullyConnectedLayer(784, 100))
+# add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
+# add_layer(network, FullyConnectedLayer(100, 50))
+# add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
+# add_layer(network, FullyConnectedLayer(50, 10))
+# add_layer(network, ActivationLayer(compute_tanh, compute_tanh′))
 
 epochs = 100
 learning_rate = 0.1
